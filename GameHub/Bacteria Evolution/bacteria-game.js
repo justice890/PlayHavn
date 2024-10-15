@@ -37,12 +37,41 @@ function updateAutoGrowth() {
     autoGrowthElement.innerText = autoGrowth;
 }
 
+// Initialize the Leaflet map
+const map = L.map('map').setView([20, 0], 2); // Set the initial view of the map
+
+// Add a tile layer to the map (you can choose a different tile if you prefer)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// Initialize the heatmap layer
+const heat = L.heatLayer([], { radius: 25, blur: 15 }).addTo(map);
+
+// Array to hold heatmap data
+let bacteriaHeatmapData = [];
+
+// Function to update the heatmap with bacteria spread
+function updateHeatmap() {
+    heat.setLatLngs(bacteriaHeatmapData); // Update heatmap data
+    heat.redraw(); // Redraw the heatmap
+}
+
 // Function for replicating bacteria when clicking the button
 replicateBtn.addEventListener('click', () => {
     bacteriaCount += bacteriaPerClick;
     updateBacteriaCount();
     replicateSound.currentTime = 0; // Reset sound to start
     replicateSound.play(); // Play the replicate sound
+
+    // Update bacteria spread on the map
+    const spreadLat = Math.random() * 180 - 90; // Random latitude between -90 and 90
+    const spreadLng = Math.random() * 360 - 180; // Random longitude between -180 and 180
+
+    bacteriaHeatmapData.push([spreadLat, spreadLng, Math.log(bacteriaPerClick + 1)]); // Log scale for better visualization
+
+    updateHeatmap(); // Update the heatmap display
 });
 
 // Generic function to buy an upgrade
@@ -110,7 +139,6 @@ document.getElementById('buy-upgrade-2-env2').addEventListener('click', function
     buyUpgrade(100, document.getElementById('buy-upgrade-2-env2'), null);
 });
 
-// Event listeners for upgrade buttons in Environment 2
 document.getElementById('buy-upgrade-3-env2').addEventListener('click', function() {
     if (!upgrade3Purchased) {
         buyUpgrade(upgrade3Cost, document.getElementById('buy-upgrade-3-env2'), null);
@@ -156,42 +184,3 @@ document.getElementById('buy-upgrade-5-env2').addEventListener('click', function
         document.getElementById('buy-upgrade-5-env2').disabled = true;
     }
 });
-
-// Map variables
-const bacteriaMap = document.getElementById('bacteria-map');
-const mapSize = 10; // Define the map size (10x10 grid)
-let bacteriaCells = Array(mapSize).fill().map(() => Array(mapSize).fill(0)); // 2D array to track bacteria spread
-
-// Function to render the bacteria map
-function renderBacteriaMap() {
-    const cellSize = bacteriaMap.width / mapSize; // Calculate size of each cell based on the canvas width
-    const ctx = bacteriaMap.getContext('2d'); // Get the drawing context
-    ctx.clearRect(0, 0, bacteriaMap.width, bacteriaMap.height); // Clear the current map
-
-    for (let i = 0; i < mapSize; i++) {
-        for (let j = 0; j < mapSize; j++) {
-            // Set fill color based on the bacteria count in the cell
-            ctx.fillStyle = `rgba(76, 175, 80, ${bacteriaCells[i][j] / 10})`; // Adjust opacity based on bacteria count
-            ctx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize); // Draw the cell
-            ctx.strokeRect(i * cellSize, j * cellSize, cellSize, cellSize); // Border for the cells
-        }
-    }
-}
-
-// Update the replicate button event listener to include map update
-replicateBtn.addEventListener('click', () => {
-    bacteriaCount += bacteriaPerClick;
-    updateBacteriaCount();
-    replicateSound.currentTime = 0; // Reset sound to start
-    replicateSound.play(); // Play the replicate sound
-
-    // Update bacteria spread on the map
-    let spreadX = Math.floor(Math.random() * mapSize); // Random X position
-    let spreadY = Math.floor(Math.random() * mapSize); // Random Y position
-    bacteriaCells[spreadX][spreadY] += 1; // Increment bacteria count in that cell
-
-    renderBacteriaMap(); // Render the updated map
-});
-
-// Render the initial map
-renderBacteriaMap();
