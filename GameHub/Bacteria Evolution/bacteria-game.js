@@ -94,6 +94,11 @@ function buyUpgrade(upgradeCost, upgradeElement, environment) {
             document.getElementById('environment-2').style.display = 'block'; // Show Environment 2
             isEnvironment2Unlocked = true; // Mark as unlocked
         }
+
+        if (environment === 3) {
+            document.getElementById('environment-3').style.display = 'block'; // Show Environment 2
+            isEnvironment3Unlocked = true; // Mark as unlocked
+        }
         // Uncomment if you have an upgrade sound
         // upgradeSound.play();
     } else {
