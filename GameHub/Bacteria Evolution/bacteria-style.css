@@ -19,7 +19,7 @@ h1 {
 
 main {
     margin: 40px auto;
-    max-width: 600px;
+    max-width: 1200px; /* Increased width to accommodate side-by-side layout */
 }
 
 .status {
@@ -43,7 +43,23 @@ button:hover {
     transform: scale(1.05); /* Scale button slightly */
 }
 
+/* Container for both environments */
+.environments-container {
+    display: flex; /* Use flexbox to arrange children side by side */
+    justify-content: space-between; /* Space them evenly */
+    margin-top: 20px; /* Add some margin on top */
+}
 
+/* Each environment */
+.environment {
+    width: 45%; /* Adjust width to fit side by side */
+    border: 1px solid #ccc; /* Optional: Add a border */
+    padding: 10px; /* Optional: Add padding */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    background-color: #f9f9f9; /* Optional: Background color */
+}
+
+/* Upgrade section styling */
 .upgrades {
     margin-top: 40px;
 }
