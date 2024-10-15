@@ -83,6 +83,24 @@ buyUpgrade3Btn.addEventListener('click', () => {
     }
 });
 
+// Function to buy an upgrade
+function buyUpgrade(upgradeCost, upgradeElement, environment) {
+    if (bacteriaCount >= upgradeCost) {
+        bacteriaCount -= upgradeCost; // Deduct the cost from bacteria count
+        bacteriaCountElement.textContent = bacteriaCount; // Update display
+        upgradeElement.style.display = 'none'; // Hide the upgrade option
+
+        if (environment === 2) {
+            document.getElementById('environment-2').style.display = 'block'; // Show Environment 2
+            isEnvironment2Unlocked = true; // Mark as unlocked
+        }
+        // Uncomment if you have an upgrade sound
+        // upgradeSound.play();
+    } else {
+        alert("Not enough bacteria to purchase this upgrade!"); // Alert if not enough bacteria
+    }
+}
+
 // Automated bacteria growth
 setInterval(() => {
     bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
