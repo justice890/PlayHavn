@@ -11,7 +11,7 @@ let upgrade3Purchased = false; // For tracking if automated growth has been purc
 
 // DOM elements
 const bacteriaCountElement = document.getElementById('bacteria-count');
-const autoGrowthElement = document.getElementById('auto-growth'); // Add this line to track auto growth display
+const autoGrowthElement = document.getElementById('auto-growth');
 const replicateBtn = document.getElementById('replicate-btn');
 
 // Upgrade buttons for Environment 1
@@ -30,7 +30,7 @@ function updateBacteriaCount() {
 
 // Function to update the automated growth display
 function updateAutoGrowth() {
-    autoGrowthElement.innerText = autoGrowth; // Update this line
+    autoGrowthElement.innerText = autoGrowth;
 }
 
 // Function for replicating bacteria when clicking the button
@@ -117,4 +117,3 @@ document.getElementById('buy-upgrade-4-env2').addEventListener('click', function
 document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
     buyUpgrade(300, document.getElementById('buy-upgrade-5-env2'), 2);
 });
-
