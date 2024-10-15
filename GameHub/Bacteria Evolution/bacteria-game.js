@@ -99,9 +99,9 @@ setInterval(() => {
 
 // Event listeners for upgrade buttons in Environment 2
 document.getElementById('buy-upgrade-4').addEventListener('click', function() {
-    buyUpgrade(200, document.getElementById('buy-upgrade-4'), 3); // Environment 3 for upgrade 4
+    buyUpgrade(200, document.getElementById('upgrade-4-env2'), 2);
 });
 
 document.getElementById('buy-upgrade-5').addEventListener('click', function() {
-    buyUpgrade(300, document.getElementById('buy-upgrade-5'), 3); // Environment 3 for upgrade 5
+    buyUpgrade(300, document.getElementById('upgrade-5-env2'), 2);
 });
