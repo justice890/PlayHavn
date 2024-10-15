@@ -5,9 +5,13 @@ let autoGrowth = 0; // Automatically gained bacteria per second
 let upgrade1Cost = 10; // Cost for faster replication
 let upgrade2Cost = 100; // Cost for colonizing new environment
 let upgrade3Cost = 50; // Cost for automated growth
+let upgrade4Cost = 200; // Cost for enhanced replication speed
+let upgrade5Cost = 300; // Cost for genetic modification
 let upgrade1Purchased = false;
 let upgrade2Purchased = false;
-let upgrade3Purchased = false; // For tracking if automated growth has been purchased
+let upgrade3Purchased = false;
+let upgrade4Purchased = false;
+let upgrade5Purchased = false;
 
 // DOM elements
 const bacteriaCountElement = document.getElementById('bacteria-count');
@@ -118,25 +122,21 @@ document.getElementById('buy-upgrade-3-env2').addEventListener('click', function
     }
 });
 
-
 // Event listener for Enhanced Replication Speed in Environment 2
 document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
-    const enhancedReplicationCost = 200; // Set the cost for this upgrade
     if (!upgrade4Purchased) {
-        buyUpgrade(enhancedReplicationCost, document.getElementById('buy-upgrade-4-env2'), null);
-        bacteriaPerClick += 3; // Increase bacteria per click by 3 (adjust as needed)
+        buyUpgrade(upgrade4Cost, document.getElementById('buy-upgrade-4-env2'), null);
+        bacteriaPerClick += 3; // Increase bacteria per click by 3
         upgrade4Purchased = true;
         document.getElementById('buy-upgrade-4-env2').innerText = 'Purchased';
         document.getElementById('buy-upgrade-4-env2').disabled = true;
     }
 });
 
-
-// Event listener for Genetic Modification in Environment 2
+// Event listener for Mutation Chance in Environment 2
 document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
-    const geneticModificationCost = 300; // Set the cost for this upgrade
     if (!upgrade5Purchased) {
-        buyUpgrade(geneticModificationCost, document.getElementById('buy-upgrade-5-env2'), null);
+        buyUpgrade(upgrade5Cost, document.getElementById('buy-upgrade-5-env2'), null);
         
         // Add mutation chance on each click (10% chance for 10x bacteria)
         replicateBtn.addEventListener('click', () => {
@@ -164,15 +164,16 @@ let bacteriaCells = Array(mapSize).fill().map(() => Array(mapSize).fill(0)); // 
 
 // Function to render the bacteria map
 function renderBacteriaMap() {
-    bacteriaMap.innerHTML = ''; // Clear the current map
+    const cellSize = bacteriaMap.width / mapSize; // Calculate size of each cell based on the canvas width
+    const ctx = bacteriaMap.getContext('2d'); // Get the drawing context
+    ctx.clearRect(0, 0, bacteriaMap.width, bacteriaMap.height); // Clear the current map
+
     for (let i = 0; i < mapSize; i++) {
         for (let j = 0; j < mapSize; j++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            if (bacteriaCells[i][j] > 0) {
-                cell.classList.add('active'); // Add class if there's bacteria
-            }
-            bacteriaMap.appendChild(cell);
+            // Set fill color based on the bacteria count in the cell
+            ctx.fillStyle = `rgba(76, 175, 80, ${bacteriaCells[i][j] / 10})`; // Adjust opacity based on bacteria count
+            ctx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize); // Draw the cell
+            ctx.strokeRect(i * cellSize, j * cellSize, cellSize, cellSize); // Border for the cells
         }
     }
 }
@@ -192,4 +193,5 @@ replicateBtn.addEventListener('click', () => {
     renderBacteriaMap(); // Render the updated map
 });
 
-
+// Render the initial map
+renderBacteriaMap();
