@@ -127,3 +127,12 @@ document.getElementById('buy-upgrade-2').addEventListener('click', function() {
 document.getElementById('buy-upgrade-3').addEventListener('click', function() {
     buyUpgrade(50, document.getElementById('upgrade-3'));
 });
+
+// New upgrade button event listeners for Environment 2
+document.getElementById('buy-upgrade-4').addEventListener('click', function() {
+    buyUpgrade(200, document.getElementById('upgrade-4'), 2);
+});
+
+document.getElementById('buy-upgrade-5').addEventListener('click', function() {
+    buyUpgrade(300, document.getElementById('upgrade-5'), 2);
+});
