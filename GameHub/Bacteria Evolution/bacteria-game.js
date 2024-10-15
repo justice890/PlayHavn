@@ -106,14 +106,54 @@ document.getElementById('buy-upgrade-2-env2').addEventListener('click', function
     buyUpgrade(100, document.getElementById('buy-upgrade-2-env2'), null);
 });
 
+// Event listeners for upgrade buttons in Environment 2
 document.getElementById('buy-upgrade-3-env2').addEventListener('click', function() {
-    buyUpgrade(50, document.getElementById('buy-upgrade-3-env2'), null);
+    if (!upgrade3Purchased) {
+        buyUpgrade(upgrade3Cost, document.getElementById('buy-upgrade-3-env2'), null);
+        autoGrowth += 2; // Increase automated growth by 2
+        upgrade3Purchased = true;
+        document.getElementById('buy-upgrade-3-env2').innerText = 'Purchased';
+        document.getElementById('buy-upgrade-3-env2').disabled = true;
+        updateAutoGrowth(); // Update the auto growth display
+    }
 });
 
+
+// Event listener for Enhanced Replication Speed in Environment 2
 document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
-    buyUpgrade(200, document.getElementById('buy-upgrade-4-env2'), 2);
+    const enhancedReplicationCost = 200; // Set the cost for this upgrade
+    if (!upgrade4Purchased) {
+        buyUpgrade(enhancedReplicationCost, document.getElementById('buy-upgrade-4-env2'), null);
+        bacteriaPerClick += 3; // Increase bacteria per click by 3 (adjust as needed)
+        upgrade4Purchased = true;
+        document.getElementById('buy-upgrade-4-env2').innerText = 'Purchased';
+        document.getElementById('buy-upgrade-4-env2').disabled = true;
+    }
 });
 
+
+// Event listener for Genetic Modification in Environment 2
 document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
-    buyUpgrade(300, document.getElementById('buy-upgrade-5-env2'), 2);
+    const geneticModificationCost = 300; // Set the cost for this upgrade
+    if (!upgrade5Purchased) {
+        buyUpgrade(geneticModificationCost, document.getElementById('buy-upgrade-5-env2'), null);
+        
+        // Add mutation chance on each click (10% chance for 10x bacteria)
+        replicateBtn.addEventListener('click', () => {
+            const mutationChance = Math.random(); // Generate a random number between 0 and 1
+            if (mutationChance < 0.1) { // 10% chance for mutation
+                const mutationBonus = bacteriaPerClick * 10; // 10x the normal bacteria per click
+                bacteriaCount += mutationBonus; // Add bonus bacteria
+                updateBacteriaCount(); // Update the bacteria count display
+
+                // Alert the player that a mutation occurred (optional)
+                alert(`Mutation occurred! You gained an extra ${mutationBonus} bacteria!`);
+            }
+        });
+        
+        upgrade5Purchased = true;
+        document.getElementById('buy-upgrade-5-env2').innerText = 'Purchased';
+        document.getElementById('buy-upgrade-5-env2').disabled = true;
+    }
 });
+
