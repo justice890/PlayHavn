@@ -98,15 +98,6 @@ setInterval(() => {
 }, 1000); // Update every second
 
 // Event listeners for upgrade buttons in Environment 2
-document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
-    buyUpgrade(200, document.getElementById('buy-upgrade-4-env2'), 2);
-});
-
-document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
-    buyUpgrade(300, document.getElementById('buy-upgrade-5-env2'), 2);
-});
-
-// Add event listeners for other upgrades in Environment 2
 document.getElementById('buy-upgrade-1-env2').addEventListener('click', function() {
     buyUpgrade(10, document.getElementById('buy-upgrade-1-env2'), null);
 });
@@ -118,3 +109,12 @@ document.getElementById('buy-upgrade-2-env2').addEventListener('click', function
 document.getElementById('buy-upgrade-3-env2').addEventListener('click', function() {
     buyUpgrade(50, document.getElementById('buy-upgrade-3-env2'), null);
 });
+
+document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
+    buyUpgrade(200, document.getElementById('buy-upgrade-4-env2'), 2);
+});
+
+document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
+    buyUpgrade(300, document.getElementById('buy-upgrade-5-env2'), 2);
+});
+
