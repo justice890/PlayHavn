@@ -1,104 +1,64 @@
-/* Reset some basic styles */
 body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f4f8; /* Light background color */
-    color: #333; /* Dark text color */
-    line-height: 1.6;
 }
 
-/* Header Styles */
 header {
-    background: linear-gradient(135deg, #4a90e2, #00bcd4); /* Gradient background color */
-    color: white; /* Header text color */
-    padding: 30px 20px;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }
 
 header h1 {
     margin: 0;
-    font-size: 3em;
-    letter-spacing: 1px;
+    font-size: 36px;
 }
 
 header p {
     margin-top: 10px;
-    font-size: 1.4em;
-    font-weight: 300;
+    font-size: 18px;
 }
 
-/* Main Styles */
-main {
+.game-gallery {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     padding: 20px;
+    gap: 20px;
 }
 
-/* Game Choice Cards */
-.game-choice {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    padding: 30px;
-    width: 300px;
+.game-tile {
+    width: 200px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 2px solid transparent; /* Border for hover effect */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.game-choice:hover {
+.game-tile:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    border-color: #00bcd4; /* Highlight border on hover */
 }
 
-.game-choice h2 {
-    margin: 0;
-    font-size: 1.8em;
-    color: #4a90e2; /* Accent color */
-    text-transform: uppercase; /* Uppercase for titles */
+.game-tile img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
-.game-choice p {
+.game-tile h2 {
     margin: 10px 0;
-    font-size: 1.1em;
-    color: #555; /* Slightly lighter text */
+    font-size: 18px;
+    color: #333;
 }
 
-/* Button Styles */
-.game-choice button {
-    background: #4a90e2; /* Button background color */
-    color: white; /* Button text color */
-    border: none;
-    border-radius: 25px; /* More rounded corners */
-    padding: 12px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.game-choice button:hover {
-    background: #357ab8; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
-}
-
-/* Footer Styles */
-footer {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 0.9em;
-    color: #777;
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-    .game-choice {
-        width: 90%; /* Make the cards full width on smaller screens */
-    }
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
