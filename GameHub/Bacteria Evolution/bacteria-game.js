@@ -88,3 +88,19 @@ setInterval(() => {
     bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
     updateBacteriaCount();
 }, 1000); // Update every second
+
+// Adding event listener for the replicate button
+replicateButton.addEventListener('click', replicate);
+
+// Event listeners for upgrade buttons
+document.getElementById('buy-upgrade-1').addEventListener('click', function() {
+    buyUpgrade(10, document.getElementById('upgrade-1'));
+});
+
+document.getElementById('buy-upgrade-2').addEventListener('click', function() {
+    buyUpgrade(100, document.getElementById('upgrade-2'));
+});
+
+document.getElementById('buy-upgrade-3').addEventListener('click', function() {
+    buyUpgrade(50, document.getElementById('upgrade-3'));
+});
