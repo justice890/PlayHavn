@@ -2,8 +2,8 @@
 let bacteriaCount = 0;
 let bacteriaPerClick = 1;
 let autoGrowth = 0; // Automatically gained bacteria per second
-let upgrade1Cost = 10;
-let upgrade2Cost = 100;
+let upgrade1Cost = 10; // Cost for faster replication
+let upgrade2Cost = 100; // Cost for colonizing new environment
 let upgrade3Cost = 50; // Cost for automated growth
 let upgrade1Purchased = false;
 let upgrade2Purchased = false;
@@ -11,11 +11,12 @@ let upgrade3Purchased = false; // For tracking if automated growth has been purc
 
 // DOM elements
 const bacteriaCountElement = document.getElementById('bacteria-count');
-const autoGrowthElement = document.getElementById('auto-growth');
 const replicateBtn = document.getElementById('replicate-btn');
-const buyUpgrade1Btn = document.getElementById('buy-upgrade-1');
-const buyUpgrade2Btn = document.getElementById('buy-upgrade-2');
-const buyUpgrade3Btn = document.getElementById('buy-upgrade-3');
+
+// Upgrade buttons for Environment 1
+const buyUpgrade1Btn = document.getElementById('buy-upgrade-1-env1');
+const buyUpgrade2Btn = document.getElementById('buy-upgrade-2-env1');
+const buyUpgrade3Btn = document.getElementById('buy-upgrade-3-env1');
 
 // Sound elements
 const replicateSound = document.getElementById('replicate-sound');
@@ -28,7 +29,7 @@ function updateBacteriaCount() {
 
 // Function to update the automated growth display
 function updateAutoGrowth() {
-    autoGrowthElement.innerText = autoGrowth;
+    document.getElementById('auto-growth').innerText = autoGrowth;
 }
 
 // Function for replicating bacteria when clicking the button
@@ -49,8 +50,6 @@ function buyUpgrade(upgradeCost, upgradeElement, environment) {
         // Show new environment if purchased
         if (environment === 2) {
             document.getElementById('environment-2').style.display = 'block'; // Show Environment 2
-        } else if (environment === 3) {
-            document.getElementById('environment-3').style.display = 'block'; // Show Environment 3
         }
 
         upgradeSound.currentTime = 0; // Reset sound to start
@@ -98,10 +97,10 @@ setInterval(() => {
 }, 1000); // Update every second
 
 // Event listeners for upgrade buttons in Environment 2
-document.getElementById('buy-upgrade-4').addEventListener('click', function() {
+document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
     buyUpgrade(200, document.getElementById('upgrade-4-env2'), 2);
 });
 
-document.getElementById('buy-upgrade-5').addEventListener('click', function() {
+document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
     buyUpgrade(300, document.getElementById('upgrade-5-env2'), 2);
 });
