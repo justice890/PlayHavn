@@ -1,7 +1,6 @@
 // Initial game state
 let bacteriaCount = 0;
 let bacteriaPerClick = 1;
-let replicationRate = 1; // for future use
 let autoGrowth = 0; // Automatically gained bacteria per second
 let upgrade1Cost = 10;
 let upgrade2Cost = 100;
@@ -40,71 +39,57 @@ replicateBtn.addEventListener('click', () => {
     replicateSound.play(); // Play the replicate sound
 });
 
-// Function to buy the Faster Replication upgrade
-buyUpgrade1Btn.addEventListener('click', () => {
-    if (bacteriaCount >= upgrade1Cost && !upgrade1Purchased) {
-        bacteriaCount -= upgrade1Cost;
-        bacteriaPerClick += 1;
-        upgrade1Purchased = true;
-        buyUpgrade1Btn.disabled = true;
-        buyUpgrade1Btn.innerText = 'Purchased';
-        updateBacteriaCount();
-        upgradeSound.currentTime = 0; // Reset sound to start
-        upgradeSound.play(); // Play the upgrade sound
-    }
-});
-
-// Function to buy the Colonize New Environment upgrade
-buyUpgrade2Btn.addEventListener('click', () => {
-    if (bacteriaCount >= upgrade2Cost && !upgrade2Purchased) {
-        bacteriaCount -= upgrade2Cost;
-        upgrade2Purchased = true;
-        buyUpgrade2Btn.disabled = true;
-        buyUpgrade2Btn.innerText = 'Purchased';
-        // TODO: Unlock new features or environments here.
-        updateBacteriaCount();
-        upgradeSound.currentTime = 0; // Reset sound to start
-        upgradeSound.play(); // Play the upgrade sound
-    }
-});
-
-// Function to buy the Automated Growth upgrade
-buyUpgrade3Btn.addEventListener('click', () => {
-    if (bacteriaCount >= upgrade3Cost && !upgrade3Purchased) {
-        bacteriaCount -= upgrade3Cost;
-        autoGrowth += 1; // Increase automated growth rate
-        upgrade3Purchased = true;
-        buyUpgrade3Btn.disabled = true;
-        buyUpgrade3Btn.innerText = 'Purchased';
-        updateBacteriaCount();
-        updateAutoGrowth();
-        upgradeSound.currentTime = 0; // Reset sound to start
-        upgradeSound.play(); // Play the upgrade sound
-    }
-});
-
-// Function to buy an upgrade
+// Generic function to buy an upgrade
 function buyUpgrade(upgradeCost, upgradeElement, environment) {
     if (bacteriaCount >= upgradeCost) {
         bacteriaCount -= upgradeCost; // Deduct the cost from bacteria count
-        bacteriaCountElement.textContent = bacteriaCount; // Update display
+        updateBacteriaCount(); // Update display
         upgradeElement.style.display = 'none'; // Hide the upgrade option
-
+        
+        // Show new environment if purchased
         if (environment === 2) {
             document.getElementById('environment-2').style.display = 'block'; // Show Environment 2
-            isEnvironment2Unlocked = true; // Mark as unlocked
+        } else if (environment === 3) {
+            document.getElementById('environment-3').style.display = 'block'; // Show Environment 3
         }
 
-        if (environment === 3) {
-            document.getElementById('environment-3').style.display = 'block'; // Show Environment 2
-            isEnvironment3Unlocked = true; // Mark as unlocked
-        }
-        // Uncomment if you have an upgrade sound
-        // upgradeSound.play();
+        upgradeSound.currentTime = 0; // Reset sound to start
+        upgradeSound.play(); // Play the upgrade sound
     } else {
         alert("Not enough bacteria to purchase this upgrade!"); // Alert if not enough bacteria
     }
 }
+
+// Event listeners for upgrade buttons in Environment 1
+buyUpgrade1Btn.addEventListener('click', () => {
+    if (!upgrade1Purchased) {
+        buyUpgrade(upgrade1Cost, buyUpgrade1Btn, null);
+        bacteriaPerClick += 1; // Increase bacteria per click
+        upgrade1Purchased = true;
+        buyUpgrade1Btn.innerText = 'Purchased';
+        buyUpgrade1Btn.disabled = true;
+    }
+});
+
+buyUpgrade2Btn.addEventListener('click', () => {
+    if (!upgrade2Purchased) {
+        buyUpgrade(upgrade2Cost, buyUpgrade2Btn, 2); // Unlock Environment 2
+        upgrade2Purchased = true;
+        buyUpgrade2Btn.innerText = 'Purchased';
+        buyUpgrade2Btn.disabled = true;
+    }
+});
+
+buyUpgrade3Btn.addEventListener('click', () => {
+    if (!upgrade3Purchased) {
+        buyUpgrade(upgrade3Cost, buyUpgrade3Btn, null);
+        autoGrowth += 1; // Increase automated growth rate
+        upgrade3Purchased = true;
+        buyUpgrade3Btn.innerText = 'Purchased';
+        buyUpgrade3Btn.disabled = true;
+        updateAutoGrowth(); // Update auto growth display
+    }
+});
 
 // Automated bacteria growth
 setInterval(() => {
@@ -112,23 +97,7 @@ setInterval(() => {
     updateBacteriaCount();
 }, 1000); // Update every second
 
-// Adding event listener for the replicate button
-replicateButton.addEventListener('click', replicate);
-
-// Event listeners for upgrade buttons
-document.getElementById('buy-upgrade-1').addEventListener('click', function() {
-    buyUpgrade(10, document.getElementById('upgrade-1'));
-});
-
-document.getElementById('buy-upgrade-2').addEventListener('click', function() {
-    buyUpgrade(100, document.getElementById('upgrade-2'));
-});
-
-document.getElementById('buy-upgrade-3').addEventListener('click', function() {
-    buyUpgrade(50, document.getElementById('upgrade-3'));
-});
-
-// New upgrade button event listeners for Environment 2
+// Event listeners for upgrade buttons in Environment 2
 document.getElementById('buy-upgrade-4').addEventListener('click', function() {
     buyUpgrade(200, document.getElementById('upgrade-4'), 2);
 });
