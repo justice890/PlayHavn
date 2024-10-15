@@ -1,96 +1,89 @@
-/* Basic styles for the entire page */
-body {
-    font-family: 'Arial', sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
     color: #333;
     text-align: center;
 }
 
 header {
-    background-color: #4CAF50;
-    padding: 20px;
+    background-color: #4a90e2; /* A modern blue shade */
+    padding: 40px 20px;
     color: white;
 }
 
 h1 {
-    margin: 0;
-    font-size: 36px;
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
 p {
-    margin: 10px 0;
-    font-size: 18px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
-/* Layout for the game cards */
-.game-grid {
+main {
+    padding: 20px;
+}
+
+.game-list {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin: 40px auto;
-    gap: 20px;
-    max-width: 1200px;
+    flex-wrap: wrap; /* Allows items to wrap for smaller screens */
+    margin-top: 20px;
 }
 
-.game-card {
+.game-item {
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    border-radius: 12px;
     width: 300px;
-    transition: transform 0.2s;
+    margin: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
 }
 
-.game-card:hover {
-    transform: scale(1.05);
+.game-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
-.game-card img {
-    width: 100%;
-    height: auto;
+.game-item h2 {
+    color: #4a90e2; /* Matching header color */
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
-.game-card h2 {
-    font-size: 24px;
-    margin: 10px 0;
+.game-item p {
+    font-size: 1em;
+    margin-bottom: 15px;
 }
 
-.game-card p {
-    font-size: 16px;
-    padding: 0 20px;
-    color: #666;
-}
-
-.game-card button {
-    background-color: #4CAF50;
-    border: none;
-    padding: 10px 20px;
+.game-item a {
+    text-decoration: none;
+    background-color: #4a90e2; /* Primary button color */
     color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 20px 0;
-    width: 80%;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    padding: 12px 25px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
 
-.game-card button:hover {
-    background-color: #45a049;
+.game-item a:hover {
+    background-color: #357ab8; /* Darker shade on hover */
 }
 
-/* Footer styles */
 footer {
+    margin-top: 40px;
+    padding: 20px;
     background-color: #333;
     color: white;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
+    position: relative;
     bottom: 0;
-}
-
-footer p {
-    margin: 0;
-    font-size: 14px;
+    width: 100%;
 }
