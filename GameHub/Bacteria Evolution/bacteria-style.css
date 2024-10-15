@@ -19,7 +19,7 @@ h1 {
 
 main {
     margin: 40px auto;
-    max-width: 1200px; /* Increased width to accommodate side-by-side layout */
+    max-width: 1200px; /* Increased width for side-by-side layout */
 }
 
 .status {
@@ -43,23 +43,21 @@ button:hover {
     transform: scale(1.05); /* Scale button slightly */
 }
 
-/* Container for both environments */
 .environments-container {
-    display: flex; /* Use flexbox to arrange children side by side */
-    justify-content: space-between; /* Space them evenly */
-    margin-top: 20px; /* Add some margin on top */
+    display: flex; /* Use flexbox for side-by-side layout */
+    justify-content: space-between; /* Space out the environments */
+    margin-top: 20px;
 }
 
-/* Each environment */
 .environment {
-    width: 45%; /* Adjust width to fit side by side */
-    border: 1px solid #ccc; /* Optional: Add a border */
-    padding: 10px; /* Optional: Add padding */
-    border-radius: 5px; /* Optional: Add rounded corners */
-    background-color: #f9f9f9; /* Optional: Background color */
+    flex: 1; /* Allow each environment to take equal space */
+    margin: 0 10px; /* Add some space between environments */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */
+    padding: 20px;
 }
 
-/* Upgrade section styling */
 .upgrades {
     margin-top: 40px;
 }
@@ -68,7 +66,7 @@ button:hover {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 20px;
-    margin: 10px;
+    margin: 10px 0; /* Margin on top and bottom only */
     border-radius: 8px;
 }
 
