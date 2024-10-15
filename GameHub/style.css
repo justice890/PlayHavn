@@ -10,20 +10,23 @@ body {
 
 /* Header Styles */
 header {
-    background: #4a90e2; /* Header background color */
+    background: linear-gradient(135deg, #4a90e2, #00bcd4); /* Gradient background color */
     color: white; /* Header text color */
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5em;
+    font-size: 3em;
+    letter-spacing: 1px;
 }
 
 header p {
     margin-top: 10px;
-    font-size: 1.2em;
+    font-size: 1.4em;
+    font-weight: 300;
 }
 
 /* Main Styles */
@@ -37,44 +40,51 @@ main {
 /* Game Choice Cards */
 .game-choice {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 15px;
-    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 30px;
     width: 300px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent; /* Border for hover effect */
 }
 
 .game-choice:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    border-color: #00bcd4; /* Highlight border on hover */
 }
 
 .game-choice h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.8em;
     color: #4a90e2; /* Accent color */
+    text-transform: uppercase; /* Uppercase for titles */
 }
 
 .game-choice p {
     margin: 10px 0;
-    font-size: 1em;
+    font-size: 1.1em;
+    color: #555; /* Slightly lighter text */
 }
 
+/* Button Styles */
 .game-choice button {
     background: #4a90e2; /* Button background color */
     color: white; /* Button text color */
     border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
+    border-radius: 25px; /* More rounded corners */
+    padding: 12px 20px;
     font-size: 1em;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .game-choice button:hover {
     background: #357ab8; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
 }
 
 /* Footer Styles */
@@ -91,3 +101,4 @@ footer {
         width: 90%; /* Make the cards full width on smaller screens */
     }
 }
+
