@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bacteria Evolution</title>
     <link rel="stylesheet" href="bacteria-style.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Leaflet Heatmap Plugin -->
+    <script src="https://unpkg.com/leaflet-heat/dist/leaflet-heat.js"></script>
 </head>
 <body>
     <header>
@@ -21,10 +27,7 @@
         <button id="replicate-btn">Replicate</button>
 
 <!-- Add this inside the <main> tag after the replicate button -->
-<div class="map-container">
-    <h2>Bacteria Spread Map</h2>
-    <canvas id="bacteria-map" width="600" height="400"></canvas>
-</div>
+    <div id="map" style="width: 800px; height: 400px; margin: 20px auto;"></div>
 
 
         <!-- Environments Container -->
