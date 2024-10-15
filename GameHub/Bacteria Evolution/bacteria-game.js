@@ -13,9 +13,9 @@ let upgrade3Purchased = false; // For tracking if automated growth has been purc
 const bacteriaCountElement = document.getElementById('bacteria-count');
 const autoGrowthElement = document.getElementById('auto-growth');
 const replicateBtn = document.getElementById('replicate-btn');
-const buyUpgrade1Btn = document.getElementById('buy-upgrade-1-env1');
-const buyUpgrade2Btn = document.getElementById('buy-upgrade-2-env1');
-const buyUpgrade3Btn = document.getElementById('buy-upgrade-3-env1');
+const buyUpgrade1Btn = document.getElementById('buy-upgrade-1');
+const buyUpgrade2Btn = document.getElementById('buy-upgrade-2');
+const buyUpgrade3Btn = document.getElementById('buy-upgrade-3');
 
 // Sound elements
 const replicateSound = document.getElementById('replicate-sound');
@@ -98,11 +98,10 @@ setInterval(() => {
 }, 1000); // Update every second
 
 // Event listeners for upgrade buttons in Environment 2
-document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
-    buyUpgrade(200, document.getElementById('upgrade-4-env2'), 3); // Update to correct environment
+document.getElementById('buy-upgrade-4').addEventListener('click', function() {
+    buyUpgrade(200, document.getElementById('buy-upgrade-4'), 3); // Environment 3 for upgrade 4
 });
 
-document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
-    buyUpgrade(300, document.getElementById('upgrade-5-env2'), 3); // Update to correct environment
+document.getElementById('buy-upgrade-5').addEventListener('click', function() {
+    buyUpgrade(300, document.getElementById('buy-upgrade-5'), 3); // Environment 3 for upgrade 5
 });
-
