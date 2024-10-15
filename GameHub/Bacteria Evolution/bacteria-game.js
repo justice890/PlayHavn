@@ -157,3 +157,39 @@ document.getElementById('buy-upgrade-5-env2').addEventListener('click', function
     }
 });
 
+// Map variables
+const bacteriaMap = document.getElementById('bacteria-map');
+const mapSize = 10; // Define the map size (10x10 grid)
+let bacteriaCells = Array(mapSize).fill().map(() => Array(mapSize).fill(0)); // 2D array to track bacteria spread
+
+// Function to render the bacteria map
+function renderBacteriaMap() {
+    bacteriaMap.innerHTML = ''; // Clear the current map
+    for (let i = 0; i < mapSize; i++) {
+        for (let j = 0; j < mapSize; j++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            if (bacteriaCells[i][j] > 0) {
+                cell.classList.add('active'); // Add class if there's bacteria
+            }
+            bacteriaMap.appendChild(cell);
+        }
+    }
+}
+
+// Update the replicate button event listener to include map update
+replicateBtn.addEventListener('click', () => {
+    bacteriaCount += bacteriaPerClick;
+    updateBacteriaCount();
+    replicateSound.currentTime = 0; // Reset sound to start
+    replicateSound.play(); // Play the replicate sound
+
+    // Update bacteria spread on the map
+    let spreadX = Math.floor(Math.random() * mapSize); // Random X position
+    let spreadY = Math.floor(Math.random() * mapSize); // Random Y position
+    bacteriaCells[spreadX][spreadY] += 1; // Increment bacteria count in that cell
+
+    renderBacteriaMap(); // Render the updated map
+});
+
+
