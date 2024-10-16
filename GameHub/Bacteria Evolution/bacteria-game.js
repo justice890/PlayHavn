@@ -12,7 +12,6 @@ let upgrade2Purchased = false;
 let upgrade3Purchased = false;
 let upgrade4Purchased = false;
 let upgrade5Purchased = false;
-let mutationActive = false; // Tracks if mutation chance is active
 
 // DOM elements
 const bacteriaCountElement = document.getElementById('bacteria-count');
@@ -36,12 +35,11 @@ function updateBacteriaCount() {
 // Function to update the automated growth display
 function updateAutoGrowth() {
     autoGrowthElement.innerText = autoGrowth;
+    console.log(`Auto growth updated: ${autoGrowth}`); // Log the auto growth value
 }
 
 // Initialize the Leaflet map
 const map = L.map('map').setView([20, 0], 2); // Set the initial view of the map
-
-// Add a tile layer to the map (you can choose a different tile if you prefer)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '© OpenStreetMap'
@@ -61,21 +59,10 @@ function updateHeatmap() {
 
 // Function for replicating bacteria when clicking the button
 replicateBtn.addEventListener('click', () => {
-    let bacteriaGained = bacteriaPerClick;
-
-    // Check for mutation (if activated by upgrade 5)
-    if (mutationActive) {
-        const mutationChance = Math.random();
-        if (mutationChance < 0.1) { // 10% mutation chance
-            bacteriaGained = bacteriaPerClick * 10; // 10x bacteria gain on mutation
-            alert(`Mutation occurred! You gained an extra ${bacteriaGained - bacteriaPerClick} bacteria!`);
-        }
-    }
-
-    bacteriaCount += bacteriaGained;
+    bacteriaCount += bacteriaPerClick;
     updateBacteriaCount();
-    replicateSound.currentTime = 0;
-    replicateSound.play();
+    replicateSound.currentTime = 0; // Reset sound to start
+    replicateSound.play(); // Play the replicate sound
 
     // Update bacteria spread on the map
     const spreadLat = Math.random() * 180 - 90; // Random latitude between -90 and 90
@@ -92,7 +79,7 @@ function buyUpgrade(upgradeCost, upgradeElement, environment) {
         bacteriaCount -= upgradeCost; // Deduct the cost from bacteria count
         updateBacteriaCount(); // Update display
         upgradeElement.style.display = 'none'; // Hide the upgrade option
-
+        
         // Show new environment if purchased
         if (environment === 2) {
             document.getElementById('environment-2').style.display = 'block'; // Show Environment 2
@@ -138,8 +125,10 @@ buyUpgrade3Btn.addEventListener('click', () => {
 
 // Automated bacteria growth
 setInterval(() => {
-    bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
-    updateBacteriaCount();
+    if (autoGrowth > 0) { // Only apply automated growth if it's greater than 0
+        bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
+        updateBacteriaCount();
+    }
 }, 1000); // Update every second
 
 // Event listeners for upgrade buttons in Environment 2
@@ -155,21 +144,13 @@ document.getElementById('buy-upgrade-3-env2').addEventListener('click', function
     if (!upgrade3Purchased) {
         buyUpgrade(upgrade3Cost, document.getElementById('buy-upgrade-3-env2'), null);
         autoGrowth += 2; // Increase automated growth by 2
+        console.log(`Upgrading Auto Growth: ${autoGrowth}`); // Log the new auto growth
         upgrade3Purchased = true;
         document.getElementById('buy-upgrade-3-env2').innerText = 'Purchased';
         document.getElementById('buy-upgrade-3-env2').disabled = true;
         updateAutoGrowth(); // Update the auto growth display
     }
 });
-
-// Automated bacteria growth (applies to all environments)
-setInterval(() => {
-    if (autoGrowth > 0) { // Only apply automated growth if it's greater than 0
-        bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
-        updateBacteriaCount();
-    }
-}, 1000); // Update every second
-
 
 // Event listener for Enhanced Replication Speed in Environment 2
 document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
@@ -186,7 +167,20 @@ document.getElementById('buy-upgrade-4-env2').addEventListener('click', function
 document.getElementById('buy-upgrade-5-env2').addEventListener('click', function() {
     if (!upgrade5Purchased) {
         buyUpgrade(upgrade5Cost, document.getElementById('buy-upgrade-5-env2'), null);
-        mutationActive = true; // Activate mutation chance
+        
+        // Add mutation chance on each click (10% chance for 10x bacteria)
+        replicateBtn.addEventListener('click', () => {
+            const mutationChance = Math.random(); // Generate a random number between 0 and 1
+            if (mutationChance < 0.1) { // 10% chance for mutation
+                const mutationBonus = bacteriaPerClick * 10; // 10x the normal bacteria per click
+                bacteriaCount += mutationBonus; // Add bonus bacteria
+                updateBacteriaCount(); // Update the bacteria count display
+
+                // Alert the player that a mutation occurred (optional)
+                alert(`Mutation occurred! You gained an extra ${mutationBonus} bacteria!`);
+            }
+        });
+        
         upgrade5Purchased = true;
         document.getElementById('buy-upgrade-5-env2').innerText = 'Purchased';
         document.getElementById('buy-upgrade-5-env2').disabled = true;
