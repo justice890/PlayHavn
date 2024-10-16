@@ -162,6 +162,15 @@ document.getElementById('buy-upgrade-3-env2').addEventListener('click', function
     }
 });
 
+// Automated bacteria growth (applies to all environments)
+setInterval(() => {
+    if (autoGrowth > 0) { // Only apply automated growth if it's greater than 0
+        bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
+        updateBacteriaCount();
+    }
+}, 1000); // Update every second
+
+
 // Event listener for Enhanced Replication Speed in Environment 2
 document.getElementById('buy-upgrade-4-env2').addEventListener('click', function() {
     if (!upgrade4Purchased) {
