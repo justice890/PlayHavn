@@ -4,14 +4,16 @@ let bacteriaPerClick = 1;
 let autoGrowth = 0; // Automatically gained bacteria per second
 let upgrade1Cost = 10; // Cost for faster replication
 let upgrade2Cost = 100; // Cost for colonizing new environment
-let upgrade3Cost = 50; // Cost for automated growth
+let upgrade3Cost = 50; // Cost for automated growth (removed in Env 2)
 let upgrade4Cost = 200; // Cost for enhanced replication speed
 let upgrade5Cost = 300; // Cost for genetic modification
+let upgrade6Cost = 150; // Cost for bacteria burst
 let upgrade1Purchased = false;
 let upgrade2Purchased = false;
 let upgrade3Purchased = false;
 let upgrade4Purchased = false;
 let upgrade5Purchased = false;
+let upgrade6Purchased = false; // Bacteria Burst upgrade
 
 // DOM elements
 const bacteriaCountElement = document.getElementById('bacteria-count');
@@ -22,6 +24,11 @@ const replicateBtn = document.getElementById('replicate-btn');
 const buyUpgrade1Btn = document.getElementById('buy-upgrade-1-env1');
 const buyUpgrade2Btn = document.getElementById('buy-upgrade-2-env1');
 const buyUpgrade3Btn = document.getElementById('buy-upgrade-3-env1');
+
+// Upgrade buttons for Environment 2
+const buyUpgrade4Btn = document.getElementById('buy-upgrade-4-env2');
+const buyUpgrade5Btn = document.getElementById('buy-upgrade-5-env2');
+const buyUpgrade6Btn = document.getElementById('buy-upgrade-6-env2'); // Bacteria Burst
 
 // Sound elements
 const replicateSound = document.getElementById('replicate-sound');
@@ -35,11 +42,12 @@ function updateBacteriaCount() {
 // Function to update the automated growth display
 function updateAutoGrowth() {
     autoGrowthElement.innerText = autoGrowth;
-    console.log(`Auto growth updated: ${autoGrowth}`); // Log the auto growth value
 }
 
 // Initialize the Leaflet map
 const map = L.map('map').setView([20, 0], 2); // Set the initial view of the map
+
+// Add a tile layer to the map (you can choose a different tile if you prefer)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '© OpenStreetMap'
@@ -125,10 +133,8 @@ buyUpgrade3Btn.addEventListener('click', () => {
 
 // Automated bacteria growth
 setInterval(() => {
-    if (autoGrowth > 0) { // Only apply automated growth if it's greater than 0
-        bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
-        updateBacteriaCount();
-    }
+    bacteriaCount += autoGrowth; // Increase bacteria count based on autoGrowth
+    updateBacteriaCount();
 }, 1000); // Update every second
 
 // Event listeners for upgrade buttons in Environment 2
@@ -140,15 +146,15 @@ document.getElementById('buy-upgrade-2-env2').addEventListener('click', function
     buyUpgrade(100, document.getElementById('buy-upgrade-2-env2'), null);
 });
 
-document.getElementById('buy-upgrade-3-env2').addEventListener('click', function() {
-    if (!upgrade3Purchased) {
-        buyUpgrade(upgrade3Cost, document.getElementById('buy-upgrade-3-env2'), null);
-        autoGrowth += 2; // Increase automated growth by 2
-        console.log(`Upgrading Auto Growth: ${autoGrowth}`); // Log the new auto growth
-        upgrade3Purchased = true;
-        document.getElementById('buy-upgrade-3-env2').innerText = 'Purchased';
-        document.getElementById('buy-upgrade-3-env2').disabled = true;
-        updateAutoGrowth(); // Update the auto growth display
+// Bacteria Burst upgrade
+buyUpgrade6Btn.addEventListener('click', () => {
+    if (!upgrade6Purchased) {
+        bacteriaCount += 150; // Give a one-time boost of 150 bacteria
+        updateBacteriaCount(); // Update the display
+        buyUpgrade(upgrade6Cost, buyUpgrade6Btn, null);
+        upgrade6Purchased = true;
+        buyUpgrade6Btn.innerText = 'Purchased';
+        buyUpgrade6Btn.disabled = true;
     }
 });
 
