@@ -1,78 +1,85 @@
-# Game Hub
+PlayHavn Studios Website
+Overview
+Welcome to the repository for the official website of PlayHavn Studios. This website showcases our games, mission, and team, providing players and partners with insights into our projects and updates. Built using modern web technologies, this site is deployed on Netlify with version control on GitHub, ensuring continuous development and seamless updates.
 
-Welcome to  **Play Havn**, a collection of fun and engaging browser games where you can explore different themes, from evolving bacteria to mastering pixel art!
+Table of Contents
+Features
+Tech Stack
+Getting Started
+Project Structure
+Deployment
+Contributing
+License
+Features
+Homepage with featured games, mission statement, and updates.
+Games Section to showcase game details, trailers, and galleries.
+About Section with studio history, team bios, and core values.
+Contact Form for inquiries and community engagement.
+Responsive Design optimized for desktop, tablet, and mobile devices.
+Tech Stack
+Framework: [React/Gatsby/Next.js] (pick one as preferred)
+Deployment: Netlify
+Version Control: GitHub
+Styling: CSS Modules or Styled Components
+JavaScript: ES6+ syntax for modern, clean code
+Images & Media: Optimized formats (e.g., WebP) for performance
+Getting Started
+Prerequisites
+Node.js (v14 or later)
+Git
+Installation
+Clone the Repository:
 
-## Games Available
-1. **Bacteria Evolution** - Grow a microorganism empire and dominate new environments.
-2. **Pixel Art Master** - Start with a single pixel and create amazing pixel art worlds.
-3. **Alien Colonization** - Conquer planets and build a galactic empire from scratch.
+bash
+Copy code
+git clone https://github.com/yourusername/playhavn-website.git
+cd playhavn-website
+Install Dependencies:
 
-More games coming soon!
+bash
+Copy code
+npm install
+Run Development Server:
 
-## How to Play
-Visit our live site hosted on Netlify to start playing any of the games:
-- [Play Havn Live](https://playhavn.com) 
+bash
+Copy code
+npm start
+This will start a local server at http://localhost:3000 (or specified port) where you can preview changes in real time.
 
-Simply choose a game from the homepage and dive in!
+Building for Production
+To create an optimized production build:
 
-## Development
+bash
+Copy code
+npm run build
+Deploying to Netlify
+Netlify will automatically deploy the website from the main branch upon each push. If you wish to manually deploy, connect this repository to your Netlify account and follow their deployment instructions.
 
-This project is built using **HTML**, **CSS**, and **JavaScript**. We plan to expand each game module and add more games in the future.
+Project Structure
+Here’s an overview of the main folders and files in this project:
 
-### Getting Started
-To run the project locally:
+plaintext
+Copy code
+.
+├── public/                 # Static assets (images, favicon, etc.)
+├── src/
+│   ├── components/         # Reusable components (header, footer, buttons, etc.)
+│   ├── pages/              # Main pages (index.js for Home, about.js, games.js)
+│   ├── styles/             # CSS or styling files
+│   └── assets/             # Images and media files
+├── .gitignore              # Files and folders to ignore in Git
+├── README.md               # Project information and setup instructions
+├── package.json            # Project dependencies and scripts
+└── netlify.toml            # Netlify deployment configuration
+Deployment
+Automatic Deployment: Each push to the main branch on GitHub triggers a Netlify build and deployment.
+Manual Deployment: If needed, trigger manual deployments directly in the Netlify dashboard.
+Contributing
+We welcome contributions from the community! To contribute:
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/game-hub.git
-    ```
-2. Navigate to the project folder:
-    ```bash
-    cd game-hub
-    ```
-3. Open the `index.html` file in your browser to view the homepage and play the games.
-
-### Prerequisites
-No special setup is needed, as the project uses basic web technologies.
-
-## Deployment
-
-This project is continuously deployed to Netlify. Every time you push changes to the `main` branch, Netlify will automatically build and deploy the latest version of the site.
-
-Netlify link: [https://playhavn.netlify.app](https://playhavn.netlify.app)
-
-## Features
-
-- A variety of incremental browser games to play.
-- Clean and simple homepage with a game selection interface.
-- Fully responsive layout, playable on mobile and desktop.
-
-## Future Features
-
-- User profiles and progress tracking across games.
-- More game themes and mechanics.
-- Custom achievements and unlockable bonuses across games.
-
-## Contributing
-
-We welcome contributions! If you have ideas for new games, improvements, or bug fixes, feel free to create a pull request or submit an issue.
-
-### How to Contribute
-1. Fork the repository.
-2. Create your feature branch:
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-3. Commit your changes:
-    ```bash
-    git commit -m "Add your message here"
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature/your-feature-name
-    ```
-5. Open a pull request.
-
-## License
-
-This project is licensed under the GNU GPLv3 License. See the [LICENSE](LICENSE) file for details.
+Fork the repository.
+Create a new branch (feature/your-feature-name).
+Commit your changes and push to the branch.
+Open a pull request to the main repository.
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
